@@ -1,5 +1,5 @@
 import React from "react"
-import "./Invoice.scss";
+import "./Invoice.module.scss";
 import PropTypes from 'prop-types';
 
 function Invoice(props) {

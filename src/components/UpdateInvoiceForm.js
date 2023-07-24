@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./InvoiceList.scss";
+import "./InvoiceList.module.scss";
 import "./UpdateInvoiceForm.scss";
 import PropTypes from 'prop-types';
 

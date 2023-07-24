@@ -1,0 +1,7 @@
+.bodyWrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 375px 1fr;
+  // grid-template-rows: 200px 283px 282px;
+  height: 100vh;
+};

@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import "./GoodsList.scss";
-import "./AddNewInvoice.scss";
+import styles from "./GoodsList.scss";
+import "./AddNewInvoice.module.scss";
 import { v4 } from 'uuid';
+
+const { newInvoiceWrapper, headAdd, inv, invButton, navInvList3 } = styles;
 
 function AddNewInvoice(props) {
 
@@ -27,25 +29,25 @@ function AddNewInvoice(props) {
         </div>
       </div>
       <div className="goods-list-wrapper">
-        <div className="new-invoice-wrapper">
-          <h4 className="head-add">START NEW INVOICE</h4>
+        <div className={newInvoiceWrapper}>
+          <h4 className={headAdd}>START NEW INVOICE</h4>
           <form onSubmit={handleNewInvoiceSubmission}>
             <input
-              class="inv"
+              class={inv}
               type='text'
               name='purveyor'
               placeholder='Purveyor' required/><br />
             <input 
-            class="inv"
+            class={inv}
               type='number'
               name='invoiceNumber'
               placeholder='Invoice #' required/><br />
             <input 
-              class="inv"
+              class={inv}
               type='date'
               name='date'
               placeholder='Date' required/><br />
-            <button class="nav-inv-list-3" type='submit'>NEXT</button>
+            <button class={navInvList3} type='submit'>NEXT</button>
           </form>
         </div>
       </div>

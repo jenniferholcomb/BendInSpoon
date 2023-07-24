@@ -1,41 +1,11 @@
 import React, { useEffect, useReducer } from 'react';
 import agentsReducer from '../reducers/agents-reducer';
 import { getFetchFailure, getWeatherSuccess } from '../actions';
+import styles from "./Weather.module.scss";
 import styled from 'styled-components';
 import WeatherDay from './WeatherDay';
 
-const CompWrapper = styled.section`
-  grid-row: 2;
-`;
-
-const WeatherWrapper = styled.section`
-  outline: px solid white;
-  border-radius: none;
-  display: grid;
-  grid-row: 1;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 0px;
-  height: 150px;
-  background-color: rgb(247, 243, 236);
-  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), -15px 20px 25px 0 rgba(77, 76, 76, 0.25);
-`;
-
-const NameWrapper = styled.section` 
-  display: grid;
-  justify-items: end;
-  font-size: 23px;
-  font-weight: bold;
-  font-style: italic;
-`;
-
-// const ElementWrapper = styled.section`
-// outline: 1px solid black;
-// border-radius: 10px;
-// display: grid;
-// grid-template-columns: repeat(7, 1fr);
-// grid-gap: 0px;
-// height: 170px;
-// `;
+const {compWeaWrapper, weatherWrapper, weaItem} = styles;
 
 const initialState = {
   // isLoaded: false,
@@ -74,23 +44,23 @@ function Weather () {
 
   if (error) {
     return ( 
-      <WeatherWrapper>
+      <div className={weatherWrapper}>
         <h1>Error: {error}</h1>
-      </WeatherWrapper> 
+      </div> 
     );
   } else if (!isLoaded) {
     return (
-      <WeatherWrapper>
+      <div className={weatherWrapper}>
         <h1>...Loading...</h1>
-      </WeatherWrapper>
+      </div>
     );
   } else {
     return (
-      <CompWrapper>
-        <WeatherWrapper>
+      // <div className={compWeaWrapper}>
+        <div className={weatherWrapper}>
           <WeatherDay newForecast={forecast}/>
-        </WeatherWrapper>
-      </CompWrapper>
+        </div>
+      // </div>
     );
   }
 }

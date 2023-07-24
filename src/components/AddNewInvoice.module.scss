@@ -44,8 +44,8 @@ button[class=inv-button] {
   background-color: rgb(184, 229, 177);
   width: 100%;
   color: black;
-}
 
-.nav-inv-list-3:hover {
-  background-color: rgba(225, 241, 222, 0.901);
+  :hover {
+    background-color: rgba(225, 241, 222, 0.901);
+  };
 };

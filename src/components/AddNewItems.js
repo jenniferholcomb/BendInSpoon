@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import "./AddNewItems.scss";
+import "./AddNewItems.module.scss";
 import { v4 } from 'uuid';
 
 function AddNewItems(props) {

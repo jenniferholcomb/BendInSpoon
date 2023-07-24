@@ -2,35 +2,39 @@ import React, { useState, useEffect } from "react";
 import CalendarDay from "./CalendarDay";
 import useSTRController from "./useSTRController.js";
 import usePropertyListing from "./usePropertyListing";
-import styled from 'styled-components';
+
+//import styled from 'styled-components';
+import styles from "./Calendar.module.scss";
 import { connectFirestoreEmulator } from "firebase/firestore";
 // import Events from "./Events";
 
-const CompWrapper = styled.section`
-  outline: px solid white;
-  border-radius: none;
-  display: grid;
-  grid-row: 1;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 1.2em repeat(5, 1fr);
-  grid-gap: 0px;
-  height: 300px;
-  background-color: rgb(247, 243, 236);
-  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), -15px 20px 25px 0 rgba(77, 76, 76, 0.25);
-`;
+const { nameWrapper, calContainer, compWrapper } = styles;
 
-const NameWrapper = styled.section` 
-  display: grid;
-  justify-items: center;
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 17px;
-  margin-bottom: -12px;
-`;
+// const CompWrapper = styled.section`
+//   outline: px solid white;
+//   border-radius: none;
+//   display: grid;
+//   grid-row: 1;
+//   grid-template-columns: repeat(7, 1fr);
+//   grid-template-rows: 1.2em repeat(5, 1fr);
+//   grid-gap: 0px;
+//   height: 300px;
+//   background-color: rgb(247, 243, 236);
+//   box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), -15px 20px 25px 0 rgba(77, 76, 76, 0.25);
+// `;
 
-const testerWrap = styled.section`
+// const NameWrapper = styled.section` 
+//   display: grid;
+//   justify-items: center;
+//   font-size: 20px;
+//   font-weight: bold;
+//   margin-top: 17px;
+//   margin-bottom: -12px;
+// `;
 
-`;
+// const testerWrap = styled.section`
+
+// `;
 
 const Calendar = () => {
   const [dates, setDates] = useState([]); 
@@ -104,15 +108,15 @@ const Calendar = () => {
   }, [propertyList, listingAvailability]);
 
   return (
-    <React.Fragment>
-      <div>
-        <NameWrapper>
+    <>
+      <div className={calContainer}>
+        <div className={nameWrapper}>
           STR PERCENTAGE 
-        </NameWrapper>
+        </div>
         <div className="cal-cap">
           % SHORT TERM RENTAL'S BOOKED
         </div>
-        <CompWrapper>
+        <div className={compWrapper}>
           {percentLoaded ?
           <CalendarDay month={dates} 
                        availablePercent={monthAvail} 
@@ -120,9 +124,9 @@ const Calendar = () => {
           :
           null
           }
-        </CompWrapper>
+        </div>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 

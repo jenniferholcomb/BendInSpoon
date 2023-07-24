@@ -1,0 +1,47 @@
+.compWeaWrapper {
+  display: grid;
+  width: 100%;
+};
+
+.weatherWrapper {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-gap: 0px;
+  height: 150px;
+  width: 100%;
+  background-color: rgb(247, 243, 236);
+  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), -15px 20px 25px 0 rgba(77, 76, 76, 0.25);
+};
+
+.weaItem:nth-child(-n+7) {
+  border-top: none;
+};
+
+.weaItem:nth-child(7n) {
+  border-right: none;
+};
+
+.weaItem:nth-child(-n+7) {
+  color: gray;
+};
+
+.weaItem:nth-last-child(-n+7) {
+  background-color: rgba(100, 99, 99, 0.71);
+};
+
+.weaItem {
+  display: flex;
+  /* border-top: 4px solid white; */
+  border-right: 4px solid white;;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  padding: none;
+  font-weight: 600;
+};
+
+.logo {
+  width: 60%;
+  height: auto;
+  align-self: center;
+};

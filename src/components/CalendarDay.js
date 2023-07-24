@@ -33,7 +33,7 @@ function CalendarDay ({ month, availablePercent, monthName }) {
 
 
   return (
-    <React.Fragment>
+    <>
       {monthBg && (
         <>
           <div className="cal-month">
@@ -55,7 +55,7 @@ function CalendarDay ({ month, availablePercent, monthName }) {
           {/* </div> */}
         </>
       )}
-    </React.Fragment>
+    </>
   );
 }
 
