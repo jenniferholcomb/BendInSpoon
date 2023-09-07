@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import CalendarDay from "./CalendarDay";
 import useSTRController from "./useSTRController.js";
 import usePropertyListing from "./usePropertyListing";
-
 import styles from "./Calendar.module.scss";
-import { connectFirestoreEmulator } from "firebase/firestore";
+// import { connectFirestoreEmulator } from "firebase/firestore";
 // import Events from "./Events";
 
 const {nameWrapper, calContainer, compWrapper, calCap} = styles;
@@ -77,7 +76,7 @@ const Calendar = () => {
       setMonthAvail(availMonth);
       setPercentLoaded(true);
     } else if (propertyList) {
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propertyList, listingAvailability]);
 
   return (
