@@ -1,4 +1,4 @@
-.new-invoice-wrapper {
+.newInvoiceWrapper {
   display: grid;
   width: 60%;
   height: 60%;
@@ -13,12 +13,12 @@
   grid-row: 1 / span 6;
 };
 
-h4.head-add {
+.headAdd {
   margin-top: 20px;
   margin-bottom: -30px;
 }
 
-input[class=inv] {
+.inv {
   width: 100%;
   padding: 12px 20px;
   // margin: 8px 0;
@@ -28,7 +28,7 @@ input[class=inv] {
   box-sizing: border-box;
 };
 
-button[class=inv-button] {
+.invButton {
   width: 100%;
   background-color: #4CAF50;
   color: white;
@@ -39,13 +39,18 @@ button[class=inv-button] {
   cursor: pointer;
 };
 
-.nav-inv-list-3 {
+.navInvList3 {
+  width: 100%;
   margin-top: 20px;
+  padding: 14px 20px;
   background-color: rgb(184, 229, 177);
   width: 100%;
   color: black;
-
-  :hover {
-    background-color: rgba(225, 241, 222, 0.901);
-  };
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 };
+
+.navInvList3:hover {
+  background-color: rgba(225, 241, 222, 0.901);
+}

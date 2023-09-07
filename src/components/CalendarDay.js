@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from "react";
+import styles from "./Calendar.module.scss";
 import PropTypes from 'prop-types';
+
+const {calMonth, calText, date, propPercent, listItemCal} = styles;
 
 function CalendarDay ({ month, availablePercent, monthName }) {
   const [monthBg, setMonthBg] = useState();
@@ -29,6 +32,7 @@ function CalendarDay ({ month, availablePercent, monthName }) {
     });
 
     setMonthBg(newMonth);
+    console.log('monthbg', monthBg);
   }, []);
 
 
@@ -36,18 +40,18 @@ function CalendarDay ({ month, availablePercent, monthName }) {
     <>
       {monthBg && (
         <>
-          <div className="cal-month">
-            <div className="cal-text">
+          <div className={calMonth}>
+            <div className={calText}>
               <p>{monthName}</p>
             </div>
           </div>
           {/* <div className="list-item"> */}
             {monthBg.map((item, index) => 
               <>
-                <div className={`list-item-cal-${index + 1}`} key={index} style={{backgroundColor: `${item.background}`}}>
+                <div className={listItemCal} key={index} style={{backgroundColor: `${item.background}`}}>
                   <>
-                    <p className="date">{item.date.charAt(8) === '0' ? item.date.substring(9) : item.date.substring(8)}</p>
-                    <p className="prop-percent">{availablePercent[0].availability[item.date]}</p> 
+                    <p className={date}>{item.date.charAt(8) === '0' ? item.date.substring(9) : item.date.substring(8)}</p>
+                    <p className={propPercent}>{availablePercent[0].availability[item.date]}</p> 
                   </>
                 </div>
               </>

@@ -8,7 +8,7 @@ function WeatherDay(props) {
 
   const { newForecast } = props;
 
-  // console.log(styles)
+  console.log('weather', newForecast);
   return (
     <React.Fragment>
       {newForecast.slice(0, 21).map((item, index) => 

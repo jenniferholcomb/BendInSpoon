@@ -1,4 +1,4 @@
-.bar-inv-wrapper {
+.barInvWrapper {
   display: grid;
   grid-row: 1;
   grid-column: 1 / span 4;  
@@ -10,7 +10,7 @@
   padding-left: 20px;
 };
 
-.name-inv-wrapper {
+.nameInvWrapper {
   font-size: 20px;
   font-weight: 600;
   color: rgb(248, 246, 241);
@@ -19,7 +19,7 @@
   padding-left: 3px;
 };
 
-.container-inv-wrapper {
+.containerInvWrapper {
   display: flex;
   grid-column: 2 / span 3;
   justify-self: end;
@@ -28,7 +28,7 @@
   gap: 10px;
 };
 
-button[class^=nav-inv-list] {
+.navInvList1 {
   height: 32px;
   padding: 5px 5%;
   font-weight: 500;
@@ -37,29 +37,34 @@ button[class^=nav-inv-list] {
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 0px 5px 0 rgba(239, 239, 239, 0.459), 3px 3px 10px 0 rgba(121, 121, 121, 0.25); 
-};
-
-.nav-inv-list-1 {
   background-color: white;
   width: 170px;
   color: rgba(100, 99, 99, .95);
 }
 
-.nav-inv-list-2 {
+.navInvList2 {
+  height: 32px;
+  padding: 5px 5%;
+  font-weight: 500;
+  font-size: 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0px 5px 0 rgba(239, 239, 239, 0.459), 3px 3px 10px 0 rgba(121, 121, 121, 0.25); 
   background-color: rgba(100, 99, 99, 0.71);
   width: 188px;
   color: white;
 }
 
-.nav-inv-list-1:hover {
+.navInvList1:hover {
   background-color: rgb(232, 230, 230);
 };
 
-.nav-inv-list-2:hover {
+.navInvList2:hover {
   background-color: rgba(171, 168, 168, 0.522);
 };
 
-.invoice-list-wrapper {
+.invoiceListWrapper {
   display: grid;
   grid-row: 2 / span 6;
   grid-column: 1 / span 4;
@@ -73,7 +78,7 @@ button[class^=nav-inv-list] {
   overflow-y: scroll;
 };
 
-.invoice-list-container {
+.invoiceListContainer {
   grid-column: 1 / span 4;
   margin-top: 30px;
   padding: 10px;
@@ -83,7 +88,7 @@ button[class^=nav-inv-list] {
   justify-content: center;
 };
 
-.invoice-det-container {
+.invoiceDetContainer {
   display: grid;
   grid-column: 1 / span 4;
   width: 85%;
@@ -97,13 +102,13 @@ button[class^=nav-inv-list] {
   border-radius: 10px;
 }
 
-.inv-print-wrapper {
+.invPrintWrapper {
   display: grid;
   grid-column: 1 / span 3;
   width: 100%;
 };
 
-.heading-wrapper {
+.headingWrapper {
   display: grid;
   grid-column: 1;
   width: 100%;
@@ -112,7 +117,7 @@ button[class^=nav-inv-list] {
   padding-bottom: 20px;
 };
 
-.date-wrapper {
+.dateWrapper {
   grid-column: 3;
   justify-self: end;
   font-weight: bold;
@@ -120,7 +125,7 @@ button[class^=nav-inv-list] {
   padding-bottom: 40px;
 };
 
-.button-wrapper {
+.buttonWrapper {
   padding-bottom: 20px;
   padding-top: 20px;
   // grid-column: 1 / span 3;
@@ -131,26 +136,26 @@ button[class^=nav-inv-list] {
   width: 100%;
 };
 
-table.detail-table {
+.detailTable {
   width: 100%;
 }
 
-th.det-head-1 {
+.detHead1 {
   width: 50px;
 };
 
-th.det-head-2 {
+.detHead2 {
   width: 50px;
 }
 
-th.det-head-3 {
+.detHead3 {
   width: 60px;
 }
 
-th.det-head-4 {
+.detHead4 {
   width: 60px;
 }
 
-th.det-head-5 {
+.detHead5 {
   width: 250px;
 }

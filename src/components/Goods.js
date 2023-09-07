@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
-import "./Goods.scss";
+import styles from "./Goods.module.scss";
 import PropTypes from 'prop-types';
+
+const {itemCard, itemCard2, tableGoods, listValuesTd, listValues3, listValuesTh, goodsList} = styles;
 
 function Goods(props) {
   const [newList, setNewList] = useState(null);
@@ -33,11 +35,11 @@ function Goods(props) {
     <React.Fragment>
       {
         listLoaded ?
-          <div style={{borderLeft: `18px solid ${color}`}} className="itemCard-2">
+          <div style={{borderLeft: `18px solid ${color}`}} className={`${itemCard} ${itemCard2}`}>
             {/* <h5 className="list-values">{newList[0].description}</h5> */}
-            <table className="table-goods">
-              <tbody className="goods-list">
-                <th className="list-values">{newList[0].description}</th>
+            <table className={tableGoods}>
+              <tbody className={goodsList}>
+                <th className={listValuesTh}>{newList[0].description}</th>
                 <tr>
                   <th>Date</th>
                   <th>Price</th>
@@ -45,14 +47,14 @@ function Goods(props) {
                 {newList.map((value, index) => 
                   <React.Fragment key={index}>
                     <tr>
-                      <td className="list-values">{value.date}</td>
-                      <td className="list-values">{value.unitPrice.toFixed(2)}</td>
+                      <td className={listValuesTd}>{value.date}</td>
+                      <td className={listValuesTd}>{value.unitPrice.toFixed(2)}</td>
                     </tr>
                   </React.Fragment>
                 )}
-                <tr className="list-values-3">
+                <tr className={listValues3}>
                   <th>Item Code</th>
-                  <td className="list-values">{newList[0].itemCode}</td>
+                  <td className={listValuesTd}>{newList[0].itemCode}</td>
                 </tr>
               </tbody>
             </table>

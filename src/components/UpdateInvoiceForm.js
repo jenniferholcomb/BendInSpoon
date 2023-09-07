@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import "./InvoiceList.module.scss";
-import "./UpdateInvoiceForm.scss";
+import stylesList from "./InvoiceList.module.scss";
+import stylesUpdate from "./UpdateInvoiceForm.module.scss";
 import PropTypes from 'prop-types';
+
+const {barInvWrapper, nameInvWrapper, containerInvWrapper, navInvList1, navInvList2, invoiceListWrapper, invoiceListContainer, invoiceDetContainer, invPrintWrapper, headingWrapper, dateWrapper, buttonWrapper, detailTable, detHead1, detHead2, detHead3, detHead4, detHead5} = stylesList;
+const {invoiceWrapper, tableWrapper, cancelWrapper, dataHead1, dataHead2, dataHead3, dataHead4, dataHead5, dataRow, input3, input1, input2, editHead, editLabel, deletebtn} = stylesUpdate;
 
 function UpdateInvoiceForm(props) {
   const { invoice } = props;
@@ -67,23 +70,23 @@ function UpdateInvoiceForm(props) {
 
   return (
     <> 
-      <div className="bar-inv-wrapper">
-        <div className="name-inv-wrapper">
+      <div className={barInvWrapper}>
+        <div className={nameInvWrapper}>
           EDIT INVOICE
         </div>
-        <div className="container-inv-wrapper">
-          <button className="nav-inv-list-1" onClick={props.onReset}>BACK TO LIST</button>
+        <div className={containerInvWrapper}>
+          <button className={navInvList1} onClick={props.onReset}>BACK TO LIST</button>
         </div>
       </div>
-      <div className="invoice-list-wrapper">
-        <div className="invoice-det-container">
+      <div className={invoiceListWrapper}>
+        <div className={invoiceDetContainer}>
           <form onSubmit={handleEditsSubmission}>
-          <div className="invoice-wrapper">
-          <table className="edit-head">
+          <div className={invoiceWrapper}>
+          <table className={editHead}>
             <tr>
-              <td className="edit-label"><label htmlFor="purveyor">PURVEYOR</label></td>
+              <td className={editLabel}><label htmlFor="purveyor">PURVEYOR</label></td>
               <td><input
-                  className="input-3"
+                  className={input3}
                   type='text'
                   name='purveyor'
                   placeholder={invoice[0].purveyor} 
@@ -94,7 +97,7 @@ function UpdateInvoiceForm(props) {
             <tr>
               <td><label htmlFor="invoiceNumber">INVOICE#</label></td>
               <td><input
-                    className="input-3"
+                    className={input3}
                     type='number'
                     name='invoiceNumber'
                     placeholder={invoice[0].invoiceNumber} 
@@ -105,7 +108,7 @@ function UpdateInvoiceForm(props) {
             <tr> 
               <td><label htmlFor="date">DATE</label></td>
               <td><input
-                    className="input-3"
+                    className={input3}
                     type='date'
                     name='date'
                     placeholder={invoice[0].date}
@@ -115,22 +118,22 @@ function UpdateInvoiceForm(props) {
             </tr>
           </table>
         
-          <div className="table-wrapper">
+          <div className={tableWrapper}>
             <hr />
             <table>
             <tr>
-              <th className="data-head-1">No./</th>
-              <th className="data-head-2">Item#</th>
-              <th className="data-head-3">Description</th>
-              <th className="data-head-4">Units</th>
-              <th className="data-head-5">Price/Unit</th>
+              <th className={dataHead1}>No./</th>
+              <th className={dataHead2}>Item#</th>
+              <th className={dataHead3}>Description</th>
+              <th className={dataHead4}>Units</th>
+              <th className={dataHead5}>Price/Unit</th>
             </tr>
                 {invoice.slice(1).map((item, index) => 
                   <>
                     <tr>
                     <td>{index + 1}</td>
                     <td><input
-                      className="input-1"
+                      className={input1}
                       type='text'
                       name='itemCode'
                       placeholder={item.itemCode}
@@ -138,14 +141,14 @@ function UpdateInvoiceForm(props) {
                       onChange={(e) => handleChange(e, (index+1))}                
                       required /></td>      
                     <td className="data-row"><textarea
-                      className="input-2"
+                      className={input2}
                       name='description'
                       placeholder={item.description}
                       defaultValue={item.description} 
                       onChange={(e) => handleChange(e, (index+1))} 
                       required /></td>
                     <td><input
-                      className="input-1"
+                      className={input1}
                       type='number'
                       name='quantity'
                       placeholder={item.quantity}
@@ -153,22 +156,22 @@ function UpdateInvoiceForm(props) {
                       onChange={(e) => handleChange(e, (index+1))}               
                       required /></td>
                     <td><input
-                      className="input-1"
+                      className={input1}
                       type='number'
                       name='unitPrice'
                       placeholder={item.unitPrice}
                       defaultValue={item.unitPrice}  
                       onChange={(e) => handleChange(e, (index+1))}               
                       required /></td>
-                    <td><button className="delete" onClick={() => handleDeleteItem(index)}>DELETE</button></td>
+                    <td><button className={deletebtn} onClick={() => handleDeleteItem(index)}>DELETE</button></td>
                     </tr>
                   </>
                 )}
               </table>
             </div>
-              <div className="cancel-wrapper">
-                <button className="nav-inv-list-2" type="submit">UPDATE INVOICE</button>
-                <button className="nav-inv-list-2" onClick={props.onReset}>CANCEL</button>
+              <div className={cancelWrapper}>
+                <button className={navInvList2} type="submit">UPDATE INVOICE</button>
+                <button className={navInvList2} onClick={props.onReset}>CANCEL</button>
               </div>
             </div>
           </form><br />

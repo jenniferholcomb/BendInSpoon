@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Goods from "./Goods";
 import PropTypes from 'prop-types';
-import "./GoodsList.scss";
+import styles from "./GoodsList.module.scss";
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+
+const {barWrapper, nameWrapper, containerWrapper, nav5, nav6, goodsListWrapper, iconWrapper, downWrap, goodsIcon, iconText, upWrap, invListWrapper} = styles;
 
 function GoodsList (props) {
 
@@ -22,30 +24,30 @@ function GoodsList (props) {
 
   return (
     <>
-      <div className="bar-wrapper">
-        <div className="name-wrapper">
+      <div className={barWrapper}>
+        <div className={nameWrapper}>
           COST OF GOODS
         </div>
-        <div className="container-wrapper">
-          <button className="nav-5" onClick={props.onManageInvoicesClick}>MANAGE INVOICES</button>
-          <button className="nav-6" onClick={props.onAddInvoiceClick}>ADD INVOICE</button>
+        <div className={containerWrapper}>
+          <button className={nav5} onClick={props.onManageInvoicesClick}>MANAGE INVOICES</button>
+          <button className={nav6} onClick={props.onAddInvoiceClick}>ADD INVOICE</button>
         </div>
       </div>
-      <div className="goods-list-wrapper">
-        <div className="icon-wrapper">
-          <div className="down-wrap goods-icon">
+      <div className={goodsListWrapper}>
+        <div className={iconWrapper}>
+          <div className={`${downWrap} ${goodsIcon}`}>
             <FaArrowDown />
-            <span className="icon-text">COST DOWN</span>
+            <span className={iconText}>COST DOWN</span>
           </div>
-          <div className="up-wrap goods-icon">
+          <div className={`${upWrap} ${goodsIcon}`}>
             <FaArrowUp />
-            <span className="icon-text">COST UP</span>
+            <span className={iconText}>COST UP</span>
           </div>
         </div>    
 
         { 
         goodsLoaded ?
-        <div className="inv-list-wrapper">
+        <div className={invListWrapper}>
           {goodsListCode.map((entry, index) => 
             <Goods
               itemCodeList={entry} 

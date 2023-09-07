@@ -1,21 +1,23 @@
 import React from "react";
 import Invoice from "./Invoice";
-import "./InvoiceList.module.scss";
+import styles from "./InvoiceList.module.scss";
 import PropTypes from 'prop-types';
+
+const {barInvWrapper, nameInvWrapper, containerInvWrapper, navInvList1, invoiceListWrapper, invoiceListContainer} = styles;
 
 function InvoiceList (props) {
   return (
     <>
-      <div className="bar-inv-wrapper">
-        <div className="name-inv-wrapper">
+      <div className={barInvWrapper}>
+        <div className={nameInvWrapper}>
           MANAGE INVOICES
         </div>
-        <div className="container-inv-wrapper">
-          <button className="nav-inv-list-1" onClick={props.onReset}>BACK TO GOODS</button>
+        <div className={containerInvWrapper}>
+          <button className={navInvList1} onClick={props.onReset}>BACK TO GOODS</button>
         </div>
       </div>
-      <div className="invoice-list-wrapper">
-        <div className="invoice-list-container">
+      <div className={invoiceListWrapper}>
+        <div className={invoiceListContainer}>
           {props.invoices.map((entry, index) => 
             <Invoice
               whenInvoiceClicked= {props.onInvoiceSelection}
@@ -42,4 +44,3 @@ InvoiceList.propTypes = {
 };
 
 export default InvoiceList;
-// className="inv-list-btn"

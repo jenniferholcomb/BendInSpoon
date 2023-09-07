@@ -1,7 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import "./AddNewItems.module.scss";
+import styles from "./AddNewItems.module.scss";
+import stylesList from "./GoodsList.module.scss";
 import { v4 } from 'uuid';
+
+const {newItemsWrapper, invPrintWrapper, headingWrapper, dateWrapper, items, items2, itemsButton, itemsTA, input2} = styles;
+const {barWrapper, nameWrapper, containerWrapper, goodsListWrapper, nav6} = stylesList;
+
 
 function AddNewItems(props) {
   const { currentInvoice } = props;
@@ -37,16 +42,16 @@ function AddNewItems(props) {
 
   return (
     <>
-      <div className="bar-wrapper">
-        <div className="name-wrapper">
+      <div className={barWrapper}>
+        <div className={nameWrapper}>
           COST OF GOODS
         </div>
-        <div className="container-wrapper">
-          <button className="nav-6" onClick={props.onReset}>CANCEL</button>
+        <div className={containerWrapper}>
+          <button className={nav6} onClick={props.onReset}>CANCEL</button>
         </div>
       </div>
-      <div className="goods-list-wrapper">
-        <div className="new-items-wrapper">
+      <div className={goodsListWrapper}>
+        <div className={newItemsWrapper}>
           <h5>ADD ITEMS</h5>
           <form onSubmit={(event) => {
             const buttonName = event.nativeEvent.submitter.name;
@@ -54,38 +59,38 @@ function AddNewItems(props) {
             if (buttonName === 'addMore') handleNewItemsSubmission(event);
             }} >
             <input
-              class="items"
+              class={items}
               type='number'
               name='itemCode'
               placeholder='&nbsp;&nbsp;&nbsp;Item #' required/>
             <textarea
-              class="items"
+              class={itemsTA}
               name='description'
               placeholder='Description' required/>
             <input
-              class="items-2"
+              class={`${items} ${items2}`}
               type='number'
               name='quantity'
               placeholder='&nbsp;&nbsp;&nbsp;Quantity' required/>
             <input
-              class="items"
+              class={items}
               type='number'
               name='unitPrice'
               step= '.01'
               placeholder='&nbsp;&nbsp;&nbsp;$/Unit' required/><br /><br />
-            <button type='submit' class="items-button" name='addMore'>ADD MORE ITEMS</button><br /><br />
-            <button class="items-button" type='submit' name='submitItems'>FINISH INVOICE</button>
+            <button type='submit' class={itemsButton} name='addMore'>ADD MORE ITEMS</button><br /><br />
+            <button class={itemsButton} type='submit' name='submitItems'>FINISH INVOICE</button>
           </form>
         </div>
         
-          <div className="heading-wrapper">
+          <div className={headingWrapper}>
             <h3>INVOICE# {currentInvoice.current[0].invoiceNumber}</h3>
           </div>  
-          <div className="date-wrapper">
+          <div className={dateWrapper}>
             {currentInvoice.current[0].date}
           </div>
-          <div className="inv-print-wrapper">
-          <table >
+          <div className={invPrintWrapper}>
+          <table>
             <tr>
               <th>Item#</th>
               <th>Description</th>

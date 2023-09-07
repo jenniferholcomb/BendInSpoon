@@ -9,11 +9,14 @@ import { getFormVisible, getCreateInvoice, getInvoices,
          getAddItemsInvoice, getCompleteInvoice, getDataFailure,
          getManageInvoice, getSelectedInvoice, 
          getEditInvoice, getGoods, getReset, getUpdatedItems } from "../actions";
-import "./GoodsControl.scss";
-import "./GoodsList.scss";
+import styles from "./GoodsControl.module.scss";
+import styles2 from "./GoodsList.module.scss";
 import goodsControlReducer from "../reducers/goods-control-reducer";
 import db from './../firebase.js';
 import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
+
+const {goodsControlWrapper, loading} = styles;
+const {barWrapper, nameWrapper, containerWrapper, nav5, nav6, goodsListWrapper} = styles;
 
 const initialState = {
   formVisible: false,
@@ -164,7 +167,7 @@ function GoodsControl () {
 
   return (
     <>
-      <div className="goods-control-wrapper">
+      <div className={goodsControlWrapper}>
         { 
         error ?
           <p>Theres was an error: {error}</p>
@@ -206,17 +209,17 @@ function GoodsControl () {
             onAddInvoiceClick={() => dispatch(getFormVisible())} />
         :
           <>
-            <div className="bar-wrapper">
-              <div className="name-wrapper">
+            <div className={barWrapper}>
+              <div className={nameWrapper}>
                 COST OF GOODS
               </div>
-              <div className="container-wrapper">
-                <button className="nav-5" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
-                <button className="nav-6" onClick={() => dispatch(getFormVisible())}>ADD INVOICE</button>
+              <div className={containerWrapper}>
+                <button className={nav5} onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
+                <button className={nav6} onClick={() => dispatch(getFormVisible())}>ADD INVOICE</button>
               </div>
             </div>
-            <div className="goods-list-wrapper">
-              <p className="loading">...Loading</p>
+            <div className={goodsListWrapper}>
+              <p className={loading}>...Loading</p>
             </div>
           </>
         }   

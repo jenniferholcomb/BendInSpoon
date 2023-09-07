@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import styles from "./GoodsList.scss";
-import "./AddNewInvoice.module.scss";
+import styles from "./GoodsList.module.scss";
+import styles2 from "./AddNewInvoice.module.scss";
 import { v4 } from 'uuid';
 
-const { newInvoiceWrapper, headAdd, inv, invButton, navInvList3 } = styles;
+const {barWrapper, goodsListWrapper, nameWrapper, containerWrapper, nav6, newInvoiceWrapper, headAdd} = styles;
+const {inv, navInvList3, invButton} = styles2;
 
 function AddNewInvoice(props) {
 
@@ -20,34 +21,34 @@ function AddNewInvoice(props) {
 
   return (
     <>
-      <div className="bar-wrapper">
-        <div className="name-wrapper">
+      <div className={barWrapper}>
+        <div className={nameWrapper}>
           COST OF GOODS
         </div>
-        <div className="container-wrapper">
-          <button className="nav-6" onClick={props.onReset}>CANCEL</button>
+        <div className={containerWrapper}>
+          <button className={nav6} onClick={props.onReset}>CANCEL</button>
         </div>
       </div>
-      <div className="goods-list-wrapper">
+      <div className={goodsListWrapper}>
         <div className={newInvoiceWrapper}>
           <h4 className={headAdd}>START NEW INVOICE</h4>
           <form onSubmit={handleNewInvoiceSubmission}>
             <input
-              class={inv}
+              className={inv}
               type='text'
               name='purveyor'
               placeholder='Purveyor' required/><br />
             <input 
-            class={inv}
+            className={inv}
               type='number'
               name='invoiceNumber'
               placeholder='Invoice #' required/><br />
             <input 
-              class={inv}
+              className={inv}
               type='date'
               name='date'
               placeholder='Date' required/><br />
-            <button class={navInvList3} type='submit'>NEXT</button>
+            <button className={navInvList3} type='submit'>NEXT</button>
           </form>
         </div>
       </div>

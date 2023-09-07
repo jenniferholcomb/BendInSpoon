@@ -1,33 +1,35 @@
 import React from "react"
-import "./Invoice.module.scss";
+import styles from "./Invoice.module.scss";
 import PropTypes from 'prop-types';
+
+const {itemCard1, invoiceList, listHeaderInv, listValuesInv} = styles;
 
 function Invoice(props) {
   return (
     <>
       <div onClick = {() => props.whenInvoiceClicked(props.invoiceNumber)}>
-        <div className="itemCard-1">
+        <div className={itemCard1}>
           <table>
-            <tbody className="invoice-list">
+            <tbody>
               <tr>
-                <th className="list-header-inv">INVOICE#</th>
-                <td className="list-values-inv">{props.invoiceNumber}</td>
+                <th className={listHeaderInv}>INVOICE#</th>
+                <td className={listValuesInv}>{props.invoiceNumber}</td>
               </tr>
               <tr>
-                <th className="list-header-inv">DATE</th>
-                <td className="list-values-inv">{props.date}</td>
+                <th className={listHeaderInv}>DATE</th>
+                <td className={listValuesInv}>{props.date}</td>
               </tr>
               <tr>
-                <th className="list-header-inv">PURVEYOR</th>
-                <td className="list-values-inv">{props.purveyor}</td>
+                <th className={listHeaderInv}>PURVEYOR</th>
+                <td className={listValuesInv}>{props.purveyor}</td>
               </tr>
               <tr>
-                <th className="list-header-inv">NO. ITEMS</th>
-                <td className="list-values-inv">{props.numberItems}</td>
+                <th className={listHeaderInv}>NO. ITEMS</th>
+                <td className={listValuesInv}>{props.numberItems}</td>
               </tr>
               <tr>
-                <th className="list-header-inv">TOTAL</th>
-                <td className="list-values-inv">${props.total}</td>
+                <th className={listHeaderInv}>TOTAL</th>
+                <td className={listValuesInv}>${props.total}</td>
               </tr>
             </tbody>
           </table>

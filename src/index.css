@@ -140,7 +140,7 @@ p.prop-percent {
   border-right: 1px solid black;
 }  */
 
-input[class=inv] {
+/* input[class=inv] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -148,7 +148,7 @@ input[class=inv] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-}
+} */
 
 /* button[class=inv-button] {
   width: 100%;
@@ -161,7 +161,7 @@ input[class=inv] {
   cursor: pointer;
 } */
 
-button[class=nav-1] {
+/* button[class=nav-1] {
   width: 45%;
   background-color: rgba(100, 99, 99, 0.71);
   color: white;
@@ -170,9 +170,9 @@ button[class=nav-1] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
-button[class=nav-2] {
+/* button[class=nav-2] {
   width: 45%;
   background-color: rgba(100, 99, 99, 0.71);
   color: white;
@@ -184,7 +184,7 @@ button[class=nav-2] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 /* button[class=inv-list-btn-mmm] {
   width: 150px;
@@ -199,7 +199,7 @@ button[class=nav-2] {
   margin-left: 10px;
 } */
 
-button[class=nav-3] {
+/* button[class=nav-3] {
   width: 30%;
   background-color: #4CAF50;
   color: white;
@@ -208,7 +208,7 @@ button[class=nav-3] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 /* button[class=inv-button]:hover {
   background-color: rgba(100, 99, 99, 0.71);
@@ -250,7 +250,7 @@ button[class=nav-3] {
 
 } */
 
-input[class=input-1] {
+/* input[class=input-1] {
   width: 48%;
   height: 35px;
   margin: 8px 0;
@@ -259,7 +259,7 @@ input[class=input-1] {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-}
+} */
 
 /* textarea {
   width: 100%;
@@ -283,10 +283,10 @@ input[class=input-1] {
   resize: none;
 } */
 
-textarea[class=input-2] {
+/* textarea[class=input-2] {
   height: 35px;
   width: 90%;
-}
+} */
 
 /* button[class=items-button] {
   width: 100%;
@@ -299,7 +299,7 @@ textarea[class=input-2] {
   cursor: pointer;
 } */
 
-button[class=up-btn] {
+/* button[class=up-btn] {
   width: 150px;
   height: 60%;
   background-color: rgba(100, 99, 99, 0.71);
@@ -333,7 +333,7 @@ button[class^=det-btn] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 /* button[class=inv-list-btn] {
   width: 150px;

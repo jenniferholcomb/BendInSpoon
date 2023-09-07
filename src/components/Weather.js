@@ -2,7 +2,6 @@ import React, { useEffect, useReducer } from 'react';
 import agentsReducer from '../reducers/agents-reducer';
 import { getFetchFailure, getWeatherSuccess } from '../actions';
 import styles from "./Weather.module.scss";
-import styled from 'styled-components';
 import WeatherDay from './WeatherDay';
 
 const {compWeaWrapper, weatherWrapper, weaItem} = styles;

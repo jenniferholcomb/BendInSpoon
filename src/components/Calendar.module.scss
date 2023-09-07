@@ -16,7 +16,7 @@
   outline: px solid white;
   border-radius: none;
   display: grid;
-  grid-row: 1;
+  // grid-row: 1;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1.2em repeat(5, 1fr);
   grid-gap: 0px;
@@ -24,3 +24,104 @@
   background-color: rgb(247, 243, 236);
   box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), -15px 20px 25px 0 rgba(77, 76, 76, 0.25);
 };
+
+.calCap {
+  display: grid;
+  margin-top: 5px;
+  justify-items: center;
+  font-weight: 500;
+  font-size: 15px;
+  color: rgba(100, 99, 99, .95);
+};
+
+.calMonth {
+  display: grid;
+  /* border-right: 4px solid white; */
+  grid-row: 1;
+  grid-column: 1/8;
+  background-color: rgba(100, 99, 99, 0.71);
+  color: white;
+  justify-content: center;
+  align-content: center;
+  padding-top: 15px;
+  font-weight: 600;
+  font-size: 16px;
+  border-right: none;
+};
+
+.calText {
+  font-size: 15px;
+};
+
+p.date {
+  margin-bottom: 0;
+  font-size: 11px;
+  margin-left: 3px;
+};
+
+.date:nth-last-child(-n+28) {
+  font-weight: 400;
+};
+
+p.propPercent {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 0;
+  justify-self: center;
+  font-weight: 600;
+};
+
+//
+
+
+.listItemCal {
+  // grid-row: 2;
+  // grid-column: 1/7;
+  display: grid;
+  border-right: 4px solid white;
+  padding: none;
+  border-bottom: 3.5px solid rgb(255, 255, 255);
+}
+
+.listItemCal:nth-last-child(-n+7) {
+  border-bottom: none;
+}
+
+.listItemCal:nth-child(7n+1) {
+  border-right: none;
+}
+
+// .listItemCal7, .list-item-cal-14, .list-item-cal-21, .list-item-cal-28, .list-item-cal-35, .list-item-cal-42 {
+//   border-right: none;
+// }
+
+// .list-item-cal-1, .list-item-cal-2, .list-item-cal-3, .list-item-cal-4, .list-item-cal-5, .list-item-cal-6, .list-item-cal-7 {
+//   border-bottom: 3.5px solid rgb(255, 255, 255);
+// }
+
+
+
+
+
+
+
+
+
+// .listItem {
+//   display: grid;
+//   border-right: 4px solid white;
+//   padding: none;
+// }
+
+// .list-item-14 {
+//   border-bottom: none;
+// }
+
+// .sm-day {
+//   font-size: 10px;
+// }
+
+// .cal-bg {
+//   background-color: rgba(100, 99, 99, 0.309);
+//   /* background-color: rgba(221, 221, 172, 0.828); */
+// }

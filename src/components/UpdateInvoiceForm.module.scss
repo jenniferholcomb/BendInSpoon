@@ -1,4 +1,4 @@
-.invoice-wrapper {
+.invoiceWrapper {
   padding-top: 30px;
   padding-bottom: 30px;
   display: grid;
@@ -6,7 +6,7 @@
   outline: none;
 };
 
-.table-wrapper {
+.tableWrapper {
   display: grid;
   grid-column: 1 / span 3;
   grid-row: 2;
@@ -14,7 +14,7 @@
   outline: none;
 };
 
-.cancel-wrapper {
+.cancelWrapper {
   display: grid;
   grid-column: 2 / span 2;;
   grid-row: 1;
@@ -22,26 +22,28 @@
   margin-top: 8px;
 };
 
-th[class^=data-head] {
+th[class^=dataHead] {
   font-size: 14px;
 };
 
-th.data-head-2 {
+.dataHead2 {
+  font-size: 14px;
   padding-left: 12px;
   width: 110px;
 };
 
-th.data-head-3 {
+.dataHead3 {
+  font-size: 14px;
   width: 300px;
 };
 
-td.data-row {
+.dataRow {
   display: flex;
   flex-wrap: wrap;
   text-align: center;
 };
 
-input[class=input-3] {
+.input3 {
   width: 190px;
   margin: 8px 0;
   margin-left: 20px;
@@ -52,7 +54,7 @@ input[class=input-3] {
   font-size: 14px;
 };
 
-input[class=input-1] {
+.input1 {
   width: 48%;
   height: 30px;
   margin: 8px 0;
@@ -63,7 +65,7 @@ input[class=input-1] {
   font-size: 13px;
 };
 
-textarea[class=input-2] {
+.input2 {
   width: 100%;
   height: 50px;
   padding-top: 4px;
@@ -78,16 +80,16 @@ textarea[class=input-2] {
   text-align: center;
 };
 
-table.edit-head {
+table.editHead {
   width: 90%;
   margin-right: 10px;
 };
 
-td.edit-label {
+td.editLabel {
   width: 90px;
 };
 
-button[class=delete] {
+.deletebtn {
   width: 75px;
   height: 25px;
   background-color: rgba(100, 99, 99, 0.71);
