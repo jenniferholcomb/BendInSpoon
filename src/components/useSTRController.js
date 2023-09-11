@@ -30,7 +30,7 @@ const useSTRController = () => {
 
   const handleGetProperties = async (propertiesAll) => {
     if (propertiesAll.length === 0) {
-      await fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=bca132f1e3msh985159db0fcda8cp1d1f19jsn618569fbbe54&location=bend`)
+      await fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
