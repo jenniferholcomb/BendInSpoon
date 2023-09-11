@@ -13,12 +13,17 @@ const Calendar = () => {
   const [month, setMonth] = useState();
   // eslint-disable-next-line
   const [propertyList, loadProperties] = useSTRController();
-  const [listingAvailability] = usePropertyListing(propertyList);
+  //const [listingAvailabilityLoaded, setListingAvailabilityLoaded] = useState();
   const [percentLoaded, setPercentLoaded] = useState(false);
   const [monthAvail, setMonthAvail] = useState();
   const [monthName, setMonthName] = useState();
 
+  // const [shortPropList, setShortPropList] = useState();
+
+  const [listingAvailability, handlePropList] = usePropertyListing();
+
   useEffect(() => {
+    console.log("calendar, load prop useEffect")
     loadProperties(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -71,6 +76,17 @@ const Calendar = () => {
   }, []);
 
   useEffect(() => {
+    if (propertyList) {
+      console.log("how many times be here")
+      // const shortenedList = propertyList.slice(0,5);
+      // console.log('shortenedlist', shortenedList);
+      handlePropList(propertyList);
+      //setListingAvailabilityLoaded(listingAvailability);
+    }
+  }, [propertyList]);
+
+  useEffect(() => {
+    console.log("useEffect, propList, listAvail")
     if (propertyList && listingAvailability) {
       const availMonth = listingAvailability.filter(item => item.month === month);
       setMonthAvail(availMonth);

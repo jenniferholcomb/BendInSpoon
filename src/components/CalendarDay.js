@@ -6,6 +6,7 @@ const {calMonth, calText, date, propPercent, listItemCal} = styles;
 
 function CalendarDay ({ month, availablePercent, monthName }) {
   const [monthBg, setMonthBg] = useState();
+  console.log('availPerc', availablePercent);
 
   useEffect(() => {
     const newMonth = month.map(item => {
