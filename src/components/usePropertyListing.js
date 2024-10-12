@@ -49,7 +49,7 @@ const usePropertyListing = () => {
     // }
 
     try {
-      const response = await fetch(`https://airbnb-listings.p.rapidapi.com/v2/listingAvailabilityFull?id=${singleId}&rapidapi-key=45fea22e03mshe940fdb2d192257p1b1dbcjsne6bfa2fa780d`);
+      const response = await fetch(`https://airbnb-listings.p.rapidapi.com/v2/listingAvailabilityFull?id=${singleId}&rapidapi-key=${REACT_APP_API_KEY}`);
       
       if (!response.ok) {
         throw new Error(`${response.status}: ${response.statusText}`);
