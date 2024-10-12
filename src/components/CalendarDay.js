@@ -9,6 +9,7 @@ function CalendarDay ({ month, availablePercent, monthName }) {
   console.log('availPerc', availablePercent);
 
   useEffect(() => {
+    console.log('begin')
     const newMonth = month.map(item => {
       if (availablePercent[0].availability[item.date] >= 90) { 
         return {

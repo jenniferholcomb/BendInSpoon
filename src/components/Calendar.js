@@ -23,7 +23,6 @@ const Calendar = () => {
   const [listingAvailability, handlePropList] = usePropertyListing();
 
   useEffect(() => {
-    console.log("calendar, load prop useEffect")
     loadProperties(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,8 +76,7 @@ const Calendar = () => {
 
   useEffect(() => {
     if (propertyList) {
-      console.log("how many times be here")
-      // const shortenedList = propertyList.slice(0,5);
+      // const shortenedList = propertyList.slice(0,4);
       // console.log('shortenedlist', shortenedList);
       handlePropList(propertyList);
       //setListingAvailabilityLoaded(listingAvailability);

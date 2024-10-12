@@ -7,9 +7,8 @@ const useSTRController = () => {
   const [error, setError] = useState(null);
 
   const loadProperties = async () => {
-    console.log("useSTR, loadProps function")
     const unSubscribe = onSnapshot(
-      collection(db, "properties"),
+      collection(db, "propertiesNew"),
       (collectionSnapshot) => {
         const properties = [];
         collectionSnapshot.forEach((doc) => {
@@ -29,7 +28,8 @@ const useSTRController = () => {
   };
 
   const handleGetProperties = async (propertiesAll) => {
-    if (propertiesAll.length === 0) {
+    console.log(propertiesAll)
+    if (propertiesAll.length === 0) {  // to get new updated properties list, set propertiesAll.length !== 0. And update key in .env
       await fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
       .then(response => {
         if (!response.ok) {
@@ -66,7 +66,7 @@ const useSTRController = () => {
   };
 
   const handleSendingProps = async (propertiesId) => {
-    await addDoc(collection(db, "properties"), propertiesId);
+    await addDoc(collection(db, "propertiesNew"), propertiesId);
   };
 
   return [ propertyList, loadProperties, error ];

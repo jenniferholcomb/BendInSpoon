@@ -1,12 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import db from '../firebase.js';
-import { collection, addDoc, onSnapshot } from 'firebase/firestore'; // doc, deleteDoc, updateDoc, 
-// import useSTRController from "./useSTRController.js";
- 
+import { collection, addDoc, onSnapshot } from 'firebase/firestore'; 
+
 const usePropertyListing = () => {
-  // const [propertyList] = useSTRController(); // propError
-  // const [propertyList, setPropertyList] = useState();
-  //const [listingsLoaded, setListingsLoaded] = useState(false);
 
   const [error, setError] = useState(null);
   const [listingAvailability, setListingAvailability] = useState(null);
@@ -18,10 +14,9 @@ const usePropertyListing = () => {
   const percentArr = useRef(null);
   const propLength = useRef();
 
+  // Load listings from Firebase
   const loadListings = async () => {
-    console.log("usePropList, loadListings function")
     if (!listingsLoaded.current) {
-      console.log('listings loaded', listingsLoaded);
       const unSubscribe = onSnapshot(
         collection(db, "listings"),
         (collectionSnapshot) => {
@@ -39,163 +34,180 @@ const usePropertyListing = () => {
           listingsLoaded.current = true;
           handleGetListingAvail();
         },
-        (error) => {
-          setError(error);
-        }
+        (error) => setError(error)
       );
       return () => unSubscribe();
     }
-  }
-
-  const apiCall = async (singleId, index) => {
-    // if(index < propLength.current) {
-    //   console.log("apiCall function indexxxxx", index);
-    //   setRunCall(true);
-    //   handleScheduledCall(index+1);
-    // }
-    await fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${singleId}`) 
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        } else {
-          return response.json();
-        }
-      })
-      .then((jsonifiedResponse) => {
-        if(jsonifiedResponse.status === true) {
-          console.log('singleId', singleId);
-          parseData(jsonifiedResponse.data);
-        } else {
-          propLength.current = propLength.current - 1;
-        }
-        if(index < propertyList.current.length) {
-          console.log("apiCall function indexxxxx", index);
-          setRunCall(true);
-          handleScheduledCall(index+1);
-        }
-      })
-      .catch((error) => {
-        setError(error);
-      });
   };
 
+  const apiCall = async (singleId, index) => {
+    console.log("id index", singleId, index)
+    console.log('prop length', propLength.current)
+
+    // if (index < (propertyList.current.length) - 1) {
+    //   handleScheduledCall(index + 1);
+    // }
+
+    try {
+      const response = await fetch(`https://airbnb-listings.p.rapidapi.com/v2/listingAvailabilityFull?id=${singleId}&rapidapi-key=45fea22e03mshe940fdb2d192257p1b1dbcjsne6bfa2fa780d`);
+      
+      if (!response.ok) {
+        throw new Error(`${response.status}: ${response.statusText}`);
+      }
+      
+      const jsonifiedResponse = await response.json();
+      if (jsonifiedResponse.error) {
+        propLength.current = propLength.current - 1;
+      } else {
+        parseData(jsonifiedResponse.results);
+      }
+
+      if (index < (propertyList.current.length) - 1) {
+        handleScheduledCall(index + 1);
+      }
+    } catch (err) {
+      setError(err);
+    }
+  };
+
+  // Check availability and schedule API call if needed
   const handleGetListingAvail = () => {
-    // conditional that checks if it's been a week since the last date program was run
-    console.log('a', percentArr.current.length);
+    console.log("were here")
     if (percentArr.current.length === 0) {
       handleScheduledCall(0);
     } else {
+      const today = new Date();
       const dataDate = percentArr.current[0].date;
-      const today =  new Date();
-      const oldData = new Date(parseInt(dataDate.substring(0,4)), parseInt(dataDate.substring(5,7)), parseInt(dataDate.substring(8)));
-      const daysPassed = (today.getTime() - oldData.getTime()) / (1000*60*60*24);
+      const oldData = new Date(parseInt(dataDate.substring(0, 4)), parseInt(dataDate.substring(5, 7)), parseInt(dataDate.substring(8)));
+      const daysPassed = (today.getTime() - oldData.getTime()) / (1000 * 60 * 60 * 24);
+      console.log("were here 2")
       if (daysPassed > 5) {
-        console.log('running');
+        console.log("not here")
         handleScheduledCall(0);
       } else {
+        console.log("were here 3")
         setListingAvailability(percentArr.current);
       }
     }
   };
 
-  function handleScheduledCall(index) {
-    if (runCall === true) {
+  const handleScheduledCall = (index) => {
+    if (runCall && propertyList.current) {
+      setRunCall(false);
       setTimeout(() => {
-        console.log("api call", index);
-        setRunCall(false);
         apiCall(propertyList.current[index], index);
-      }, 2000);
+      }, 1000);
     }
-  }
+  };
 
+  // Parse data and update availability
   const parseData = (newListings) => {
-    const sixMonths = newListings.slice(0,6).reduce((array, month) => array.concat(month.days), []);
-    const available = sixMonths.reduce((array, day) => array.concat(day.available), []);
-    console.log('available', available);
+    const reduced = newListings.map(item => ({
+      "date": item.date,
+      "available": [item.available]
+    }));
 
     if (!listingsArr.current) {
-      const availArr = available.map(item => [item]);
-      listingsArr.current = availArr;
+      listingsArr.current = reduced;
     } else {
-      const availArr = listingsArr.current;
-      const newAvailArr = availArr.map((item, index) => [...item, available[index]]);  
-      listingsArr.current = newAvailArr;
-    };
-    console.log('availarr', listingsArr.current)
-    console.log('availarr length', listingsArr.current[0].length)
-    console.log('proplength length', propLength.current)
-
-    if (listingsArr.current[0].length === propLength.current) {
-      const finalArr = listingsArr.current.map(function(item) {
-        return (
-            item.reduce(function(tally, avail) {
-            tally[avail] = (tally[avail] || 0) + 1;
-             return tally; 
-            }, {}))
-      });
-      console.log('finalArr', finalArr);
-      const availability = finalArr.map(item => {
-        if(item.false) {
-          const percentCalc = (item.false/propLength.current).toFixed(2).substring(2);
-          if (percentCalc === '00') {
-            return '100';
-          } else {
-            return percentCalc;
-          }
-          // return (item.false/propLength.current).toFixed(2).substring(2);
-        } else {
-          return '0';
-        }
-      });
-      console.log('availability', availability);
-      const dates = sixMonths.reduce((array, day) => array.concat(day.date), []);
-      console.log('dates', dates);
-      const finalObj = dates.reduce((accumulator, value, i) => {
-        return {...accumulator, [value]: availability[i]};
-      }, {});
-      console.log('finalObj', finalObj);
-
-      const today = new Date().toISOString().substring(0,10);
-      const allMonths = dates.map(x => x.substring(0,7));
-      const uniqueMonths = [...new Set(allMonths)];
-      
-      const filterMonth = uniqueMonths.map(item => {
+      const merged = listingsArr.current.map(item => {
+        const newArr = reduced.find(i => i.date === item.date);
         return {
-          'date': today,
-          'month': item.substring(5), 
-          'year': item.substring(0,4),
-          'datesPercent': Object.keys(finalObj).filter((key) => key.substring(0,7) === item).reduce((obj, key) => {
-            return Object.assign(obj, {
-              [key]: finalObj[key]
-            });
-        }, {})} 
+          "date": item.date,
+          "available": [...item.available, ...(newArr ? newArr.available : [])]
+        };
       });
-      filterMonth.forEach(x => handleSendingAvail(x));
-      console.log('filterMonth', filterMonth);
+      listingsArr.current = merged;
+    }
+
+    if (listingsArr.current[0].available.length === propLength.current) {
+      const finalArr = listingsArr.current.map(item => {
+        const totalSum = item.available.reduce((sum, value) => sum + value) / item.available.length;
+        const sumAvailability = 100 - (100 * totalSum.toFixed(2));
+        return {
+          [item.date]: sumAvailability 
+        };
+      });
+
+      const finalByMonth = groupByMonth(finalArr);
+      finalByMonth.forEach(x => handleSendingAvail(x));
+      console.log(finalByMonth);
+      setRunCall(false);
       listingsLoaded.current = false;
     }
-    loadListings();
-  }
+  };
+
+  // const parseData = (newListings) => {
+
+  //   const reduced = newListings.map( item => {
+  //     return { "date": item.date, "available": [item.available] };
+  //   });
+
+  //   if (!listingsArr.current) {
+  //     listingsArr.current = reduced;
+  //   } else {
+  //     const merged = listingsArr.current.map( item => {
+  //       const newArr = reduced.find( i => i.date === item.date );
+  //       return {
+  //         "date": item.date,
+  //         "available": [ ...item.available, ...newArr.available] };
+  //     });
+  //     listingsArr.current = merged;
+  //   }
+
+  //   if (listingsArr.current[0].available.length === propLength.current) {
+  //     const finalArr = listingsArr.current.map(item => {
+  //       const sumAvailability = 100 - ( item.available.reduce( (sum, value) => sum + value) / item.available.length ).toFixed(2);
+  //       return {
+  //         [item.date]: sumAvailability === '00' ? '100' : sumAvailability 
+  //       };
+  //     });
+
+  //     const finalByMonth = groupByMonth(finalArr);
+
+  //     finalByMonth.forEach(x => handleSendingAvail(x));
+  //     console.log('finalMonth', finalByMonth);
+  //     setRunCall(false);
+  //     listingsLoaded.current = false;
+  //   }
+  //   loadListings();
+  // }
+
+  // Group by month for sending data
+  const groupByMonth = (array) => {
+    const grouped = array.reduce((acc, obj) => {
+      const dateStr = Object.keys(obj)[0];
+      const month = dateStr.substring(0, 7);
+  
+      if (!acc[month]) {
+        acc[month] = [];
+      }
+  
+      acc[month].push(obj);
+  
+      return acc;
+    }, {});
+
+    return Object.keys(grouped).map(month => ({
+      date: new Date().toISOString().substring(0, 10),
+      month: month,
+      datesPercent: grouped[month]
+    }));
+  };
+
   
   const handleSendingAvail = async (percents) => {
     await addDoc(collection(db, "listings"), percents);
   };
 
+  // Pass property list to load listings
   const handlePropList = (properties) => {
     if (properties) {
-      // propLength.current = properties.length;
-      console.log('properties', properties);
       propertyList.current = properties;
-      console.log("propertyList.current.length", propertyList.current.length);
       propLength.current = properties.length;
-      console.log('propLength.current', propLength.current);
-      //console.log(typeof(propLength.length));
       loadListings();
-    }  // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
   };
-
-  // console.log('list Avail', listingAvailability);
-  // console.log('properties', properties);
 
   return [listingAvailability, handlePropList, error];
 }
