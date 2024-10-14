@@ -6,35 +6,64 @@ const {calMonth, calText, date, propPercent, listItemCal} = styles;
 
 function CalendarDay ({ month, availablePercent, monthName }) {
   const [monthBg, setMonthBg] = useState();
-  console.log('availPerc', availablePercent);
+  console.log('availPerc', availablePercent[0].availability);
+  console.log(month)
 
   useEffect(() => {
     console.log('begin')
-    const newMonth = month.map(item => {
-      if (availablePercent[0].availability[item.date] >= 90) { 
-        return {
-          ...item,
-          background: 'rgb(254, 232, 218)'
-        } 
-      } else if (availablePercent[0].availability[item.date] >= 70) {
-        return {
-          ...item,
-          background: 'rgba(243, 249, 194, 0.8)'
-        }
+    const newMonth = month.map((item, index) => {
+      const found = availablePercent[0].availability.find(avail => avail[item.date]);
+      const percent = found ? Math.floor(found[item.date]) : undefined;
+
+      if (item.background) {
+        return { ...item };
       } else {
-        if (item.background) {
-          return { ...item };
+        if (percent >= 90) {
+          return {
+            ...item,
+            background: 'rgb(254, 232, 218)',
+            percent: percent
+          } 
+        } else if (percent >= 65) {
+          return {
+            ...item,
+            background: 'rgba(243, 249, 194, 0.8)',
+            percent: percent
+          }
         } else {
           return {
             ...item,
-            background: 'rgba(211, 238, 206, 0.9)'
+            background: 'rgba(211, 238, 206, 0.9)',
+            percent: percent
           };
         }
       }
+
+
+      // if (availablePercent[0].availability[index][`${item.date}`] >= 90) { 
+      //   return {
+      //     ...item,
+      //     background: 'rgb(254, 232, 218)'
+      //   } 
+      // } else if (availablePercent[0].availability[index] >= 70) {
+      //   return {
+      //     ...item,
+      //     background: 'rgba(243, 249, 194, 0.8)'
+      //   }
+      // } else {
+      //   if (item.background) {
+      //     return { ...item };
+      //   } else {
+      //     return {
+      //       ...item,
+      //       background: 'rgba(211, 238, 206, 0.9)'
+      //     };
+      //   }
+      // }
     });
 
     setMonthBg(newMonth);
-    console.log('monthbg', monthBg);
+    console.log('monthbg', newMonth);
   }, []);
 
 
@@ -53,7 +82,7 @@ function CalendarDay ({ month, availablePercent, monthName }) {
                 <div className={listItemCal} key={index} style={{backgroundColor: `${item.background}`}}>
                   <>
                     <p className={date}>{item.date.charAt(8) === '0' ? item.date.substring(9) : item.date.substring(8)}</p>
-                    <p className={propPercent}>{availablePercent[0].availability[item.date]}</p> 
+                    <p className={propPercent}>{item.percent}</p> 
                   </>
                 </div>
               </>

@@ -25,8 +25,7 @@ const usePropertyListing = () => {
             listings.push({
               date: doc.data().date,
               availability: doc.data().datesPercent,
-              month: parseInt(doc.data().month),
-              year: doc.data().year,
+              month: doc.data().month,
               id: doc.id
             });
           });
@@ -44,12 +43,8 @@ const usePropertyListing = () => {
     console.log("id index", singleId, index)
     console.log('prop length', propLength.current)
 
-    // if (index < (propertyList.current.length) - 1) {
-    //   handleScheduledCall(index + 1);
-    // }
-
     try {
-      const response = await fetch(`https://airbnb-listings.p.rapidapi.com/v2/listingAvailabilityFull?id=${singleId}&rapidapi-key=${REACT_APP_API_KEY}`);
+      const response = await fetch(`https://airbnb-listings.p.rapidapi.com/v2/listingAvailabilityFull?id=${singleId}&rapidapi-key=${process.env.REACT_APP_API_KEY}`);
       
       if (!response.ok) {
         throw new Error(`${response.status}: ${response.statusText}`);
@@ -90,6 +85,7 @@ const usePropertyListing = () => {
       }
     }
   };
+
 
   const handleScheduledCall = (index) => {
     if (runCall && propertyList.current) {
@@ -136,42 +132,6 @@ const usePropertyListing = () => {
       listingsLoaded.current = false;
     }
   };
-
-  // const parseData = (newListings) => {
-
-  //   const reduced = newListings.map( item => {
-  //     return { "date": item.date, "available": [item.available] };
-  //   });
-
-  //   if (!listingsArr.current) {
-  //     listingsArr.current = reduced;
-  //   } else {
-  //     const merged = listingsArr.current.map( item => {
-  //       const newArr = reduced.find( i => i.date === item.date );
-  //       return {
-  //         "date": item.date,
-  //         "available": [ ...item.available, ...newArr.available] };
-  //     });
-  //     listingsArr.current = merged;
-  //   }
-
-  //   if (listingsArr.current[0].available.length === propLength.current) {
-  //     const finalArr = listingsArr.current.map(item => {
-  //       const sumAvailability = 100 - ( item.available.reduce( (sum, value) => sum + value) / item.available.length ).toFixed(2);
-  //       return {
-  //         [item.date]: sumAvailability === '00' ? '100' : sumAvailability 
-  //       };
-  //     });
-
-  //     const finalByMonth = groupByMonth(finalArr);
-
-  //     finalByMonth.forEach(x => handleSendingAvail(x));
-  //     console.log('finalMonth', finalByMonth);
-  //     setRunCall(false);
-  //     listingsLoaded.current = false;
-  //   }
-  //   loadListings();
-  // }
 
   // Group by month for sending data
   const groupByMonth = (array) => {

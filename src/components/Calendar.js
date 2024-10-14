@@ -18,8 +18,6 @@ const Calendar = () => {
   const [monthAvail, setMonthAvail] = useState();
   const [monthName, setMonthName] = useState();
 
-  // const [shortPropList, setShortPropList] = useState();
-
   const [listingAvailability, handlePropList] = usePropertyListing();
 
   useEffect(() => {
@@ -28,15 +26,14 @@ const Calendar = () => {
 
   useEffect(() => {
     const today = new Date();
-    const monthNow = today.getMonth();
-    setMonth(monthNow + 1);
+    const monthNow = today.getMonth();  // const month = dateStr.substring(0, 7);
     const monthName = today.toLocaleString('default', { month: 'long' }).toUpperCase();
     setMonthName(monthName);
     const year = today.getFullYear();
+    setMonth(year.toString() + '-' + (monthNow + 1).toString());
     const monthDays = [31, (( year % 4 ) === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     
     const oneIndex = new Date(today.getFullYear(), monthNow, 1).getDay();
-    
     const preMonthArr = Array.from(Array(oneIndex)).map((x, i) =>  { 
       return { 'date': new Date(
         monthNow === 0 ? year - 1 : year, 
@@ -55,6 +52,7 @@ const Calendar = () => {
         i + 1
         ).toISOString().substring(0,10) }
     });
+    console.log(thisMonthArr)
 
     const lastIndex = new Date(today.getFullYear(), monthNow, monthDays[monthNow]).getDay();
 
@@ -86,6 +84,7 @@ const Calendar = () => {
   useEffect(() => {
     console.log("useEffect, propList, listAvail")
     if (propertyList && listingAvailability) {
+      console.log(listingAvailability)
       const availMonth = listingAvailability.filter(item => item.month === month);
       setMonthAvail(availMonth);
       setPercentLoaded(true);
