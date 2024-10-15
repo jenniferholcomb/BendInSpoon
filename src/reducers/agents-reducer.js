@@ -14,8 +14,16 @@ const agentsReducer = (state, action) => {
       return {
           ...state,
           isLoaded: true,
-          forecast: newForecast
+          forecastCall: newForecast
         };
+
+    case c.GET_WEATHER_LOADED:
+        return {
+          ...state,
+          isLoaded: true,
+          forecast: action.weatherForecast[0].forecast,
+          id: action.weatherForecast[0].id
+        }
 
     case c.GET_EVENTS_SUCCESS:
       const newEventsList = action.eventsList.reduce((array, list) => 
