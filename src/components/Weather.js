@@ -5,7 +5,7 @@ import styles from "./Weather.module.scss";
 import WeatherDay from './WeatherDay';
 
 import db from './../firebase.js';
-import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, doc, deleteDoc, onSnapshot } from 'firebase/firestore';
 
 const {compWeaWrapper, weatherWrapper, weaItem} = styles;
 
@@ -83,6 +83,8 @@ function Weather () {
     loadWeather();
   }, [])
 
+  
+
   const { error, isLoaded, newWeatherLoaded, forecastCall, forecast, id } = state;
 
   const handleAddingWeather = async () => {
@@ -106,12 +108,6 @@ function Weather () {
   }, [newWeatherLoaded])
 
   console.log(forecast)
-
-
-
-  // useEffect(() => {
-  //   handleAddingWeather();
-  // }, [isLoaded])
 
   if (error) {
     return ( 

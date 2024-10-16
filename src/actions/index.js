@@ -44,6 +44,11 @@ export const getHolidaySuccess = (holidayList) => ({
   holidayList
 });
 
+export const getHolidaysLoaded = (holidays) => ({
+  type: c.GET_HOLIDAYS_LOADED,
+  holidays
+});
+
 export const getFetchFailure = (error) => ({
   type: c.GET_FETCH_FAILURE,
   error

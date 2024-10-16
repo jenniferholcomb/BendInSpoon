@@ -3,7 +3,7 @@ import Header from "./Header";
 import Weather from "./Weather";
 import Calendar from "./Calendar";
 // import Events from "./Events";
-// import Holidays from "./Holidays";
+import Holidays from "./Holidays";
 import styles from "./Agents.module.scss";
 import styled from 'styled-components';
 
@@ -25,6 +25,7 @@ function Agents () {
       <Header />
       <Weather />
       <Calendar />
+      <Holidays />
       {/* <Events /> */}
     </div>
   );
