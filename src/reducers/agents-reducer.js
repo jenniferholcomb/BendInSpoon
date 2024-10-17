@@ -37,6 +37,14 @@ const agentsReducer = (state, action) => {
           eventsList: newEventsList
         };
 
+    case c.GET_EVENTS_LOADED:
+      return {
+        ...state,
+        isLoaded: true,
+        dbEventsList: action.allEvents[0].events,
+        id: action.allEvents[0].id
+      }
+
     case c.GET_HOLIDAY_SUCCESS:
       const newHolidayList = action.holidayList.filter((e, i) => e.primary_type === "Federal Holiday");
       console.log(newHolidayList)

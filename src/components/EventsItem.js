@@ -1,9 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-
-// const EventsItemWrapper = styled.section`
-//   border-right: 1px solid black;
-// `;
 
 function EventsItem () {
   return (

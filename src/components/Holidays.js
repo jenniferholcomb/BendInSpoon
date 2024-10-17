@@ -1,16 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
 import agentsReducer from '../reducers/agents-reducer';
 import { getFetchFailure, getHolidaySuccess, getHolidaysLoaded } from '../actions';
-import styled from 'styled-components';
 
 import db from './../firebase.js';
 import { collection, addDoc, doc, deleteDoc, onSnapshot } from 'firebase/firestore';
-
-const HolidayWrapper = styled.section`
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-
-`;
 
 const initialState = {
   isLoaded: false,
@@ -110,24 +103,24 @@ function Holiday () {
 
   if (error) {
     return ( 
-      <HolidayWrapper>
+      <>
         <h1>Error: {error}</h1>
-      </HolidayWrapper> 
+      </> 
     );
   } else if (!isLoaded) {
     return (
-      <HolidayWrapper>
+      <>
         <h1>...Loading...</h1>
-      </HolidayWrapper>
+      </>
     );
   } else {
     return (
 
-      <HolidayWrapper>
+      <>
         {holidayList.map(item => 
           <p>{item.name}</p>
         )}
-      </HolidayWrapper>
+      </>
     );
   }
 }

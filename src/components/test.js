@@ -103,32 +103,32 @@ function Events (props) {
     loadEvents();
   }, [])
   
-  // // get data from serverless function
-  // const fetchEvents = async () => {
-  //   setLoading(true);
-  //   setError(null);
+  // get data from serverless function
+  const fetchEvents = async () => {
+    setLoading(true);
+    setError(null);
 
-  //   try {
-  //     const response = await fetch('/.netlify/functions/getEvents', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
+    try {
+      const response = await fetch('/.netlify/functions/getEvents', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-  //     const data = await response.json();
-  //     setEvents(data.events); // Assuming `events` is part of the response
-  //   } catch (err) {
-  //     setError('Failed to fetch events');
-  //     console.error(err);
-  //   }
+      const data = await response.json();
+      setEvents(data.events); // Assuming `events` is part of the response
+    } catch (err) {
+      setError('Failed to fetch events');
+      console.error(err);
+    }
 
-  //   setLoading(false);
-  // };
+    setLoading(false);
+  };
 
   if (error) {
     return ( 
@@ -167,100 +167,100 @@ function Events (props) {
 export default Events;
 
 
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-//   setLoading(true);
-//   setError(null);
+  setLoading(true);
+  setError(null);
 
-//   try {
-//     const response = await fetch('/.netlify/functions/getEvents', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
+  try {
+    const response = await fetch('/.netlify/functions/getEvents', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     
-//     const data = await response.json();
-//     if (response.ok) {
-//       setEvents(data.events);
-//       setWeather(data.weather);
-//     } else {
-//       setError(data.error);
-//     }
-//   } catch (err) {
-//     setError('An error occurred while fetching data.');
-//   }
+    const data = await response.json();
+    if (response.ok) {
+      setEvents(data.events);
+      setWeather(data.weather);
+    } else {
+      setError(data.error);
+    }
+  } catch (err) {
+    setError('An error occurred while fetching data.');
+  }
 
-//   setLoading(false);
-// };
-
-
-//   useEffect(() => {
-//     fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=${process.env.REACT_APP_API_KEY_TICKET}&postalCode=97701&radius=20&locale=*&endDateTime=2023-05-21T15:01:00Z`)
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error(`${response.status}: ${response.statusText}`);
-//         } else {
-//           return response.json()
-//         }
-//       })
-//       .then((jsonifiedResponse) => {
-//         console.log(jsonifiedResponse);
-//         const action = getEventsSuccess(jsonifiedResponse._embedded.events)
-//         dispatch(action)
-//       })
-//       .catch((error) => {
-//         const action = getFetchFailure(error.message)
-//         dispatch(action)
-//       });
-//   }, [])
+  setLoading(false);
+};
 
 
+  useEffect(() => {
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=${process.env.REACT_APP_API_KEY_TICKET}&postalCode=97701&radius=20&locale=*&endDateTime=2023-05-21T15:01:00Z`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        } else {
+          return response.json()
+        }
+      })
+      .then((jsonifiedResponse) => {
+        console.log(jsonifiedResponse);
+        const action = getEventsSuccess(jsonifiedResponse._embedded.events)
+        dispatch(action)
+      })
+      .catch((error) => {
+        const action = getFetchFailure(error.message)
+        dispatch(action)
+      });
+  }, [])
 
-//   const fetchEvents = async () => {
-//     try {
-//       const response = await fetch("https://api.openai.com/v1/chat/completions",
-//         {
-//           method: 'POST',
-//           headers: {
-//               "Content-Type": "application/json",
-//               Authorization: `Bearer ${process.env.__}`
-//           },
-//           body: {
-//               model: 'gpt-3.5-turbo',
-//               messages: [
-//                 {
-//                   role: 'user',
-//                   content: `Give me the 10 most popular events happening in Bend, OR in key-value format where the key is the event name and the value is a short description.`,
-//                 },
-//               ]
-//           }
-//         }
-//       );
+
+
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions",
+        {
+          method: 'POST',
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${process.env.__}`
+          },
+          body: {
+              model: 'gpt-3.5-turbo',
+              messages: [
+                {
+                  role: 'user',
+                  content: `Give me the 10 most popular events happening in Bend, OR in key-value format where the key is the event name and the value is a short description.`,
+                },
+              ]
+          }
+        }
+      );
       
-//       // const eventsFromOpenAI = response.data.choices[0].message.content;
-//       // const result = {
-//       //   events: eventsFromOpenAI,
-//       // };
+      // const eventsFromOpenAI = response.data.choices[0].message.content;
+      // const result = {
+      //   events: eventsFromOpenAI,
+      // };
 
-//       // const body = JSON.stringify(result);
+      // const body = JSON.stringify(result);
 
-//       console.log(response)
+      console.log(response)
 
-//       // return {
-//       //   statusCode: 200,
-//       //   body: JSON.stringify(result),
-//       // };
-//     } catch (error) {
-//       console.error('Error fetching events:', error.message);
-//       return {
-//         statusCode: 500,
-//         body: JSON.stringify({ error: 'Failed to fetch event data.' }),
-//       };
-//     }
-//   };
+      // return {
+      //   statusCode: 200,
+      //   body: JSON.stringify(result),
+      // };
+    } catch (error) {
+      console.error('Error fetching events:', error.message);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Failed to fetch event data.' }),
+      };
+    }
+  };
 
-//   useEffect(() => {
-//     fetchEvents();
-//   }, []);
+  useEffect(() => {
+    fetchEvents();
+  }, []);

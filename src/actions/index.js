@@ -39,6 +39,11 @@ export const getEventsSuccess = (eventsList) => ({
   eventsList
 });
 
+export const getEventsLoaded = (allEvents) => ({
+  type: c.GET_EVENTS_LOADED,
+  allEvents
+})
+
 export const getHolidaySuccess = (holidayList) => ({
   type: c.GET_HOLIDAY_SUCCESS,
   holidayList
